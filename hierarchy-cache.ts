@@ -142,7 +142,8 @@ export class HierarchyCache<T = CacheableValue> {
     }
     const result = [...children];
     while(children && children.length>0) {
-      const desc = children.flatMap(child => this.getChildren(child.key))
+      const desc = children.reduce((allEntries, entry) => this.getChildren(entry.key),[])
+      //const desc = children.flatMap(child => this.getChildren(child.key))
       result.push(...desc);
       children = desc;
     }    
